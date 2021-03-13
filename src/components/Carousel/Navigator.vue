@@ -1,9 +1,9 @@
 <template>
   <div class="navigator-container">
-    <div class="navigator navigator-previous">
+    <div class="navigator navigator-previous" @click="() => $emit('previous')">
       <span class="material-icons navigator-icon">arrow_back_ios</span>
     </div>
-    <div class="navigator navigator-next">
+    <div class="navigator navigator-next" @click="() => $emit('next')">
       <span class="material-icons navigator-icon">arrow_forward_ios</span>
     </div>
   </div>

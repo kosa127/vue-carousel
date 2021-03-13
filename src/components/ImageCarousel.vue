@@ -1,13 +1,16 @@
 <template>
-  <carousel>
-    <slide class="d-flex">
+  <carousel v-model="currentSlide">
+    <slide
+      class="d-flex"
+      v-for="(slideCfg, slideIdx) in slides"
+      :key="slideIdx"
+      :index="slideIdx"
+    >
       <div
+        v-for="(src, urlIdx) in slideCfg.src"
+        :key="urlIdx"
         class="image-container w-100 h-100"
-        style="background-image: url(carousel/woman/3.jpg)"
-      ></div>
-      <div
-        class="image-container w-100 h-100"
-        style="background-image: url(carousel/man/3.jpg)"
+        :style="{ backgroundImage: `url(${src})` }"
       ></div>
     </slide>
   </carousel>
@@ -16,11 +19,22 @@
 <script>
 import Carousel from "./Carousel/Carousel";
 import Slide from "./Slide";
+import { desktopSlides } from "../config/image-carousel";
 
 export default {
   components: {
     Carousel,
     Slide
+  },
+  data: function() {
+    return {
+      currentSlide: 0
+    };
+  },
+  computed: {
+    slides() {
+      return desktopSlides;
+    }
   }
 };
 </script>
