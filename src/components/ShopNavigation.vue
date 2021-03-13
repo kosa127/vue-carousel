@@ -21,6 +21,7 @@ export default {
 $font-color: rgb(255, 255, 255);
 
 .navigation-container {
+  z-index: 1;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: $font-color;
   width: 500px;
