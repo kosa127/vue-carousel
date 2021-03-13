@@ -27,6 +27,6 @@ export default {
 
 <style>
 .image-container {
-  background-size: 100% 100%;
+  background-size: cover;
 }
 </style>
