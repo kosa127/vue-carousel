@@ -1,6 +1,6 @@
 <template>
   <div class="carousel-container w-100 h-100">
-    <navigator v-if="navigator" @next="handleNext" @previous="handlePrevious" />
+    <navigator v-if="navigator" @next="next" @previous="previous" />
     <slot></slot>
   </div>
 </template>
@@ -31,7 +31,14 @@ export default {
     navigator: {
       type: Boolean,
       default: true
+    },
+    timeout: {
+      type: Number,
+      default: 0
     }
+  },
+  created() {
+    if (this.timeout) setInterval(this.next, this.timeout);
   },
   mounted() {
     this.slides = this.$children.filter(
@@ -39,7 +46,7 @@ export default {
     );
   },
   methods: {
-    handleNext() {
+    next() {
       this.direction = "slide-right";
       if (this.index === this.slides.length - 1) {
         this.$emit("slide-changed", 0);
@@ -48,7 +55,7 @@ export default {
       }
       this.$emit("slide-changed", this.index + 1);
     },
-    handlePrevious() {
+    previous() {
       this.direction = "slide-left";
       if (this.index === 0) {
         this.$emit("slide-changed", this.slides.length - 1);
