@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Carousel from "./Carousel";
+import Carousel from "./Carousel/Carousel";
 import Slide from "./Slide";
 
 export default {
