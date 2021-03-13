@@ -25,6 +25,7 @@ $navigator-color: rgb(255, 255, 255);
   }
 
   .navigator {
+    transition-duration: 0.3s;
     :hover {
       background-color: transparent;
     }
