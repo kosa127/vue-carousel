@@ -27,17 +27,20 @@ export default {
 </script>
 
 <style lang="scss">
+.slide-container {
+  position: absolute;
+}
 .slide-left-enter-active {
-  animation: slide-left-in 0.5s ease-in;
+  animation: slide-left-in 1s ease-in;
 }
 .slide-left-leave-active {
-  animation: slide-left-out 0.5s ease-in;
+  animation: slide-left-out 1s ease-in;
 }
 .slide-right-enter-active {
-  animation: slide-right-in 0.5s ease-in;
+  animation: slide-right-in 1s ease-in;
 }
 .slide-right-leave-active {
-  animation: slide-right-out 0.5s ease-in;
+  animation: slide-right-out 1s ease-in;
 }
 
 @keyframes slide-left-in {

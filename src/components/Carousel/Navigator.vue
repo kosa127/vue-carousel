@@ -23,6 +23,10 @@ $navigator-color: rgb(255, 255, 255);
     background-color: rgba($navigator-color, 0.05);
     cursor: pointer;
   }
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 
   .navigator {
     transition-duration: 0.3s;
