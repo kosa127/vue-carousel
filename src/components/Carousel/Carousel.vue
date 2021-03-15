@@ -38,8 +38,13 @@ export default {
       default: 0
     }
   },
+  computed: {
+    currentSlide() {
+      return this.slides[this.index];
+    }
+  },
   created() {
-    if (this.timeout) setInterval(this.next, this.timeout);
+    if (this.timeout) setInterval(() => this.next(true), this.timeout);
 
     // prevent from spamming next and previous indicators
     this.next = throttle(this.next, 1000);
@@ -51,7 +56,10 @@ export default {
     );
   },
   methods: {
-    next() {
+    next(invokedByInterval = false) {
+      // prevent from going to next slide invoked by interval if user has focus on current slide
+      if (invokedByInterval && this.currentSlide.focused) return;
+
       this.direction = "slide-right";
       if (this.index === this.slides.length - 1) {
         this.$emit("slide-changed", 0);

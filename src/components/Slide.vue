@@ -1,6 +1,11 @@
 <template>
   <transition :name="direction">
-    <div v-show="visible" class="slide-container w-100 h-100">
+    <div
+      v-show="visible"
+      class="slide-container w-100 h-100"
+      @mouseover="focused = true"
+      @mouseleave="focused = false"
+    >
       <slot></slot>
     </div>
   </transition>
@@ -9,6 +14,11 @@
 <script>
 export default {
   name: "Slide",
+  data: function() {
+    return {
+      focused: false
+    };
+  },
   props: {
     index: {
       type: [Number],
