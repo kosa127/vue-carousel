@@ -2,11 +2,13 @@
   <div class="carousel-container w-100 h-100">
     <navigator v-if="navigator" @next="next" @previous="previous" />
     <slot></slot>
+    <indicator v-if="indicator" :index="index" :length="slides.length" />
   </div>
 </template>
 
 <script>
 import Navigator from "./Navigator";
+import Indicator from "./Indicator";
 import debounce from "lodash.debounce";
 import touchMixin from "../../mixins/touch";
 
@@ -14,7 +16,8 @@ export default {
   name: "Carousel",
   mixins: [touchMixin],
   components: {
-    Navigator
+    Navigator,
+    Indicator
   },
   model: {
     prop: "index",
@@ -28,10 +31,14 @@ export default {
   },
   props: {
     index: {
-      type: [String, Number],
+      type: Number,
       required: true
     },
     navigator: {
+      type: Boolean,
+      default: true
+    },
+    indicator: {
       type: Boolean,
       default: true
     },
