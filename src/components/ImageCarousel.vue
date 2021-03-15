@@ -11,7 +11,9 @@
         :key="urlIdx"
         class="image-container w-100 h-100"
         :style="{ backgroundImage: `url(${src})` }"
-      ></div>
+      >
+        <shop-navigation />
+      </div>
     </slide>
   </carousel>
 </template>
@@ -20,11 +22,13 @@
 import Carousel from "./Carousel/Carousel";
 import Slide from "./Slide";
 import { desktopSlides } from "../config/image-carousel";
+import ShopNavigation from "./ShopNavigation";
 
 export default {
   components: {
     Carousel,
-    Slide
+    Slide,
+    ShopNavigation
   },
   data: function() {
     return {
