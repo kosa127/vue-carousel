@@ -8,9 +8,11 @@
 <script>
 import Navigator from "./Navigator";
 import debounce from "lodash.debounce";
+import touchMixin from "../../mixins/touch";
 
 export default {
   name: "Carousel",
+  mixins: [touchMixin],
   components: {
     Navigator
   },
@@ -36,6 +38,14 @@ export default {
     timeout: {
       type: Number,
       default: 0
+    },
+    swipeable: {
+      type: Boolean,
+      default: true
+    },
+    swipeTolerance: {
+      type: Number,
+      default: 20
     }
   },
   computed: {
@@ -76,6 +86,17 @@ export default {
         return;
       }
       this.$emit("slide-changed", this.index - 1);
+    },
+    handleTouchEnd() {
+      if (!this.swipeable) return;
+
+      const { endX, startX } = this.touch;
+
+      // too small move, ignore it
+      if (!endX || Math.abs(endX - startX) < this.swipeTolerance) return;
+
+      if (endX < startX) this.next();
+      else this.previous();
     }
   }
 };
