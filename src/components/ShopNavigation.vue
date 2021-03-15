@@ -38,7 +38,7 @@ $font-color: rgb(255, 255, 255);
   width: $breakpoint-xs;
   margin: 0 calc((100% - #{$breakpoint-xs}) / 2);
   bottom: 130px;
-
+  user-select: none;
   position: absolute;
   display: flex;
   flex-flow: column;
