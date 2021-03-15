@@ -7,7 +7,7 @@
 
 <script>
 import Navigator from "./Navigator";
-import throttle from "lodash.throttle";
+import debounce from "lodash.debounce";
 
 export default {
   name: "Carousel",
@@ -47,8 +47,8 @@ export default {
     if (this.timeout) setInterval(() => this.next(true), this.timeout);
 
     // prevent from spamming next and previous indicators
-    this.next = throttle(this.next, 1000);
-    this.previous = throttle(this.previous, 1000);
+    this.next = debounce(this.next, 1000);
+    this.previous = debounce(this.previous, 1000);
   },
   mounted() {
     this.slides = this.$children.filter(
