@@ -16,6 +16,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/css/variables.scss";
 $navigator-color: rgb(255, 255, 255);
 
 .navigator-container {
@@ -23,6 +24,12 @@ $navigator-color: rgb(255, 255, 255);
     background-color: rgba($navigator-color, 0.05);
     cursor: pointer;
   }
+
+  @media screen and (min-width: $breakpoint-md) {
+    display: block;
+  }
+
+  display: none;
   position: absolute;
   width: 100%;
   height: 100%;

@@ -21,8 +21,9 @@
 <script>
 import Carousel from "./Carousel/Carousel";
 import Slide from "./Slide";
-import { desktopSlides } from "../config/image-carousel";
+import { desktopSlides, mobileSlides } from "../config/image-carousel";
 import ShopNavigation from "./ShopNavigation";
+import breakpoints from "../utils/breakpoints";
 
 export default {
   components: {
@@ -30,14 +31,27 @@ export default {
     Slide,
     ShopNavigation
   },
+  created() {
+    window.addEventListener("resize", this.syncWindowWidth);
+    this.syncWindowWidth();
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.syncWindowWidth);
+  },
   data: function() {
     return {
-      currentSlide: 0
+      currentSlide: 0,
+      windowWidth: 0
     };
   },
   computed: {
     slides() {
-      return desktopSlides;
+      return this.windowWidth >= breakpoints.md ? desktopSlides : mobileSlides;
+    }
+  },
+  methods: {
+    syncWindowWidth() {
+      this.windowWidth = window.innerWidth;
     }
   }
 };
