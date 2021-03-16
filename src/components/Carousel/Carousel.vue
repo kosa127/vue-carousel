@@ -2,7 +2,12 @@
   <div class="carousel-container w-100 h-100">
     <navigator v-if="navigator" @next="next" @previous="previous" />
     <slot></slot>
-    <indicator v-if="indicator" :index="index" :thumbnails="thumbnails" />
+    <indicator
+      v-if="indicator"
+      :index="index"
+      :thumbnails="thumbnails"
+      @thumbnail-clicked="jumpTo"
+    />
   </div>
 </template>
 
@@ -101,6 +106,12 @@ export default {
         return;
       }
       this.$emit("slide-changed", this.index - 1);
+    },
+    jumpTo(idx) {
+      if (idx === this.index) return;
+
+      this.direction = idx >= this.index ? "slide-right" : "slide-left";
+      this.$emit("slide-changed", idx);
     },
     handleTouchEnd() {
       if (!this.swipeable) return;

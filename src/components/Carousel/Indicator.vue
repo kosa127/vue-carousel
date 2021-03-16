@@ -1,11 +1,12 @@
-<template functional>
+<template>
   <div class="indicator-container">
     <div class="thumbnails-container">
       <div
-        v-for="(thumb, idx) in props.thumbnails"
+        v-for="(thumb, idx) in thumbnails"
         :key="idx"
         class="thumbnail d-flex"
-        :class="{ active: idx === props.index }"
+        :class="{ active: idx === index }"
+        @click="() => $emit('thumbnail-clicked', idx)"
       >
         <div v-for="(src, id) in thumb" :key="id" class="thumbnail-item">
           <div
@@ -39,6 +40,7 @@ export default {
 $thumbnail-width: 50px;
 
 .indicator-container {
+  z-index: 1;
   position: absolute;
   bottom: 0px;
   left: 50%;
@@ -50,12 +52,14 @@ $thumbnail-width: 50px;
     height: 70px;
 
     .thumbnail {
+      cursor: pointer;
       display: flex;
       margin: 0 20px;
       border: 2px solid white;
       transition: transform 2s ease;
 
       &.active {
+        cursor: auto;
         box-shadow: 10px 10px 20px black;
         transform: translateY(-15px);
       }
