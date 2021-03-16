@@ -1,5 +1,5 @@
 <template>
-  <transition :name="direction">
+  <transition :name="direction" mode="out-in">
     <div
       v-show="visible"
       class="slide-container w-100 h-100"

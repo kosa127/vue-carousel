@@ -9,7 +9,7 @@
 <script>
 import Navigator from "./Navigator";
 import Indicator from "./Indicator";
-import debounce from "lodash.debounce";
+import throttle from "lodash.throttle";
 import touchMixin from "../../mixins/touch";
 
 export default {
@@ -46,6 +46,10 @@ export default {
       type: Number,
       default: 0
     },
+    throttle: {
+      type: Number,
+      default: 2000
+    },
     swipeable: {
       type: Boolean,
       default: true
@@ -64,8 +68,8 @@ export default {
     if (this.timeout) setInterval(() => this.next(true), this.timeout);
 
     // prevent from spamming next and previous indicators
-    this.next = debounce(this.next, 1000);
-    this.previous = debounce(this.previous, 1000);
+    this.next = throttle(this.next, this.throttle);
+    this.previous = throttle(this.previous, this.throttle);
   },
   mounted() {
     this.slides = this.$children.filter(
