@@ -1,5 +1,5 @@
 <template>
-  <carousel v-model="currentSlide" :timeout="10000">
+  <carousel v-model="currentSlide" :timeout="10000" :thumbnails="thumbnails">
     <slide
       class="d-flex"
       v-for="(slideCfg, slideIdx) in slides"
@@ -47,6 +47,9 @@ export default {
   computed: {
     slides() {
       return this.windowWidth >= breakpoints.md ? desktopSlides : mobileSlides;
+    },
+    thumbnails() {
+      return this.slides.map(s => [...s.src]);
     }
   },
   methods: {

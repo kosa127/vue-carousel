@@ -2,7 +2,7 @@
   <div class="carousel-container w-100 h-100">
     <navigator v-if="navigator" @next="next" @previous="previous" />
     <slot></slot>
-    <indicator v-if="indicator" :index="index" :length="slides.length" />
+    <indicator v-if="indicator" :index="index" :thumbnails="thumbnails" />
   </div>
 </template>
 
@@ -57,6 +57,10 @@ export default {
     swipeTolerance: {
       type: Number,
       default: 20
+    },
+    thumbnails: {
+      validator: val => Array.isArray(val) && val.every(v => Array.isArray(v)),
+      default: () => []
     }
   },
   computed: {

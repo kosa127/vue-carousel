@@ -1,14 +1,19 @@
 <template functional>
   <div class="indicator-container">
-    <div
-      v-for="(el, idx) in Array(props.length)"
-      :key="idx"
-      class="material-icons indicator"
-      :style="{
-        color: idx === props.index ? 'rgb(200, 200, 200)' : 'white'
-      }"
-    >
-      fiber_manual_record
+    <div class="thumbnails-container">
+      <div
+        v-for="(thumb, idx) in props.thumbnails"
+        :key="idx"
+        class="thumbnail d-flex"
+        :class="{ active: idx === props.index }"
+      >
+        <div v-for="(src, id) in thumb" :key="id" class="thumbnail-item">
+          <div
+            class="thumbnail-image d-flex w-100 h-100"
+            :style="{ backgroundImage: `url(${src})` }"
+          ></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -21,9 +26,9 @@ export default {
       type: Number,
       required: true
     },
-    length: {
-      type: Number,
-      required: true
+    thumbnails: {
+      validator: val => Array.isArray(val) && val.every(v => Array.isArray(v)),
+      default: () => []
     }
   }
 };
@@ -31,19 +36,38 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../assets/css/variables.scss";
+$thumbnail-width: 50px;
 
 .indicator-container {
-  bottom: 60px;
+  position: absolute;
+  bottom: 0px;
   left: 50%;
   transform: translate(-50%, -50%);
 
-  position: absolute;
-  text-align: center;
-  width: 100%;
+  .thumbnails-container {
+    display: flex;
+    justify-content: center;
+    height: 70px;
 
-  .indicator {
-    padding: 0 10px;
-    font-size: 15px;
+    .thumbnail {
+      display: flex;
+      margin: 0 20px;
+      border: 2px solid white;
+      transition: transform 2s ease;
+
+      &.active {
+        box-shadow: 10px 10px 20px black;
+        transform: translateY(-15px);
+      }
+
+      .thumbnail-item {
+        width: 50px;
+
+        .thumbnail-image {
+          background-size: cover;
+        }
+      }
+    }
   }
 }
 </style>
