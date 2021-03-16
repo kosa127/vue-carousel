@@ -40,7 +40,6 @@ export default {
 $thumbnail-width: 50px;
 
 .indicator-container {
-  z-index: 1;
   position: absolute;
   bottom: 0px;
   left: 50%;

@@ -33,14 +33,13 @@ $navigator-color: rgb(255, 255, 255);
   position: absolute;
   width: 100%;
   height: 100%;
-  z-index: 1;
 
   .navigator {
     transition-duration: 0.3s;
     :hover {
       background-color: transparent;
     }
-
+    z-index: 1;
     position: absolute;
     flex-flow: column;
     display: flex;

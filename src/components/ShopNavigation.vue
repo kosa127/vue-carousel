@@ -32,7 +32,6 @@ $font-color: rgb(255, 255, 255);
     height: 250px;
   }
 
-  z-index: 1;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: $font-color;
   width: $breakpoint-xs;
