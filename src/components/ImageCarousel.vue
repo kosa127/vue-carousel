@@ -1,5 +1,10 @@
 <template>
-  <carousel v-model="currentSlide" :timeout="10000" :thumbnails="thumbnails">
+  <carousel
+    v-model="currentSlide"
+    :timeout="5000"
+    :throttle="500"
+    :thumbnails="thumbnails"
+  >
     <slide
       class="d-flex"
       v-for="(slideCfg, slideIdx) in slides"

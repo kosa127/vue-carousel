@@ -30,6 +30,7 @@ export default {
   },
   data: function() {
     return {
+      slideChangedTimestamp: 0,
       slides: [],
       direction: "slide-right"
     };
@@ -90,6 +91,10 @@ export default {
       // prevent from going to next slide invoked by interval if user has focus on current slide
       if (invokedByInterval && this.currentSlide.focused) return;
 
+      // prevent from going to next slide invoked by interval if slide has recently changed
+      if (invokedByInterval && this.hasSlideRecentlyChanged()) return;
+
+      this.slideChangedTimestamp = performance.now();
       this.direction = "slide-right";
       if (this.index === this.slides.length - 1) {
         this.$emit("slide-changed", 0);
@@ -110,6 +115,7 @@ export default {
     jumpTo(idx) {
       if (idx === this.index) return;
 
+      this.slideChangedTimestamp = performance.now();
       this.direction = idx >= this.index ? "slide-right" : "slide-left";
       this.$emit("slide-changed", idx);
     },
@@ -123,6 +129,9 @@ export default {
 
       if (endX < startX) this.next();
       else this.previous();
+    },
+    hasSlideRecentlyChanged() {
+      return performance.now() - this.slideChangedTimestamp < this.timeout;
     }
   }
 };
