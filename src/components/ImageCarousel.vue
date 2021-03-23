@@ -15,7 +15,7 @@
         v-for="(src, urlIdx) in slideCfg.src"
         :key="urlIdx"
         class="image-container w-100 h-100"
-        :style="{ backgroundImage: getDareknImage(src, 0.5) }"
+        :style="{ backgroundImage: getDarkenImage(src, 0.5) }"
       >
         <shop-navigation />
       </div>
@@ -61,7 +61,7 @@ export default {
     syncWindowWidth() {
       this.windowWidth = window.innerWidth;
     },
-    getDareknImage(src, darken) {
+    getDarkenImage(src, darken) {
       return `linear-gradient(rgba(0, 0, 0, ${darken}),rgba(0, 0, 0, ${darken})) , url(${src})`;
     }
   }
